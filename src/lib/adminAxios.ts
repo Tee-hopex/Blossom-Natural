@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useAdminStore } from '@/store/adminStore';
+import { API_BASE_URL } from './config';
 
 const adminApi = axios.create({
-  baseURL: '/api',
+  baseURL: API_BASE_URL,
   timeout: 15000,
   headers: { 'Content-Type': 'application/json' },
 });

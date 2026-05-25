@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import adminApi from '@/lib/adminAxios';
 import { useAdminStore } from '@/store/adminStore';
+import { API_BASE_URL } from '@/lib/config';
 import { ApiResponse } from '@/types';
 import toast from 'react-hot-toast';
 
@@ -21,7 +22,7 @@ export function useUploadImage() {
       // Use native fetch so the browser sets Content-Type with the correct
       // multipart boundary automatically — axios's default application/json
       // header breaks multer's form parser when set on a FormData body.
-      const res = await fetch('/api/admin/upload', {
+      const res = await fetch(`${API_BASE_URL}/admin/upload`, {
         method: 'POST',
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: formData,
