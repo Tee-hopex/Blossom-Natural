@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import {
-  TrendingUp, TrendingDown, ShoppingBag, Package,
+  TrendingUp, TrendingDown, Package,
   Clock, CheckCircle, Truck, Users, AlertTriangle, ArrowRight,
 } from 'lucide-react';
 import { useAdminDashboard } from '@/hooks/admin/useAdminDashboard';

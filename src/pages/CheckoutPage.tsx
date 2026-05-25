@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { ShoppingBag, Landmark, MessageSquare, ChevronRight } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';

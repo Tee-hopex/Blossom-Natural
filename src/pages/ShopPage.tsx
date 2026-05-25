@@ -76,7 +76,7 @@ export default function ShopPage() {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [sort, setSort] = useState<SortOption>('newest');
-  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [_filtersOpen, setFiltersOpen] = useState(false);
   const [page, setPage] = useState(1);
 
   const { data: categoriesData } = useCategories();

@@ -2,7 +2,7 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {
   LayoutDashboard, Package, ShoppingBag, Tag, Star,
-  Settings, LogOut, Menu, X, Leaf, ChevronRight,
+  Settings, LogOut, Menu, Leaf, ChevronRight,
 } from 'lucide-react';
 import { useAdminStore } from '@/store/adminStore';
 import toast from 'react-hot-toast';
