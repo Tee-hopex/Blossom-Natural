@@ -56,7 +56,7 @@ export default function AboutPage() {
             >
               <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-sage/20">
                 <img
-                  src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=600&q=80"
+                  src={new URL('../assets/founder.jpg', import.meta.url).href}
                   alt="Blossom Natural Founder"
                   className="w-full h-full object-cover"
                 />

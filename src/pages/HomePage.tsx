@@ -272,7 +272,7 @@ export default function HomePage() {
             >
               <div className="aspect-[4/5] rounded-3xl bg-sage/30 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80"
+                  src={new URL('../assets/founder.jpg', import.meta.url).href}
                   alt="Natural hair care"
                   className="w-full h-full object-cover"
                 />
