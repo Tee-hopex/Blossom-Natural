@@ -52,7 +52,7 @@ function ProductCard({ product }: { product: Product }) {
           <Star className="h-3 w-3 fill-gold text-gold" />
           <span className="text-xs text-brown/50">{product.rating.toFixed(1)} ({product.reviewCount})</span>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3">
           <div>
             <span className="font-semibold text-brown text-sm">₦{price.toLocaleString()}</span>
             {product.salePrice && (
@@ -62,7 +62,7 @@ function ProductCard({ product }: { product: Product }) {
           <button
             onClick={() => addItem(product)}
             disabled={product.stock === 0}
-            className="text-xs btn-primary py-1.5 px-3 disabled:opacity-40"
+            className="text-sm btn-primary py-2.5 px-4 disabled:opacity-40 w-full sm:w-auto"
           >
             {product.stock === 0 ? 'Sold Out' : '+ Cart'}
           </button>

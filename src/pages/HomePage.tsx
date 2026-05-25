@@ -44,7 +44,7 @@ function ProductCard({ product }: { product: Product }) {
       </Link>
       <div className="p-4">
         <Link to={`/shop/${product.slug}`}>
-          <h3 className="font-heading text-base font-semibold text-brown mb-1 hover:text-terracotta transition-colors">
+          <h3 className="font-heading text-base font-semibold text-brown mb-1 hover:text-terracotta transition-colors line-clamp-2">
             {product.name}
           </h3>
         </Link>
@@ -53,7 +53,7 @@ function ProductCard({ product }: { product: Product }) {
           <span className="text-xs text-brown/60">{product.rating.toFixed(1)}</span>
           <span className="text-xs text-brown/40">({product.reviewCount})</span>
         </div>
-        <div className="flex items-center justify-between mt-3">
+        <div className="flex flex-col gap-3 mt-3">
           <div className="flex items-baseline gap-1.5">
             <span className="font-semibold text-brown">₦{price.toLocaleString()}</span>
             {product.salePrice && (
@@ -65,9 +65,10 @@ function ProductCard({ product }: { product: Product }) {
           <button
             onClick={() => addItem(product)}
             disabled={product.stock === 0}
-            className="text-xs btn-primary py-2 px-4 disabled:opacity-40"
+            className="w-full text-xs sm:text-sm btn-primary py-2 px-2 sm:px-3 disabled:opacity-40 whitespace-nowrap"
           >
-            {product.stock === 0 ? 'Sold Out' : 'Add to Cart'}
+            <span className="sm:hidden">{product.stock === 0 ? 'Sold Out' : '+ Cart'}</span>
+            <span className="hidden sm:inline">{product.stock === 0 ? 'Sold Out' : 'Add to Cart'}</span>
           </button>
         </div>
       </div>
@@ -120,13 +121,13 @@ export default function HomePage() {
 
       {/* ── Hero ── */}
       <section className="relative overflow-hidden bg-hero-gradient min-h-[88vh] flex items-center">
-        <div className="container-custom py-20">
+        <div className="container-custom py-12 md:py-20">
           <div className="max-w-2xl">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-terracotta font-body font-medium text-sm uppercase tracking-widest mb-4"
+              className="text-terracotta font-body font-medium text-xs sm:text-sm uppercase tracking-widest mb-3 md:mb-4"
             >
               Premium Natural Hair Care
             </motion.p>
@@ -134,7 +135,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-heading text-5xl md:text-6xl lg:text-7xl text-brown leading-tight mb-6"
+              className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brown leading-tight mb-4 md:mb-6"
             >
               Nourish.
               <br />
@@ -146,7 +147,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-body text-brown/70 text-lg leading-relaxed mb-10 max-w-xl"
+              className="font-body text-brown/70 text-base sm:text-lg leading-relaxed mb-6 md:mb-10 max-w-xl"
             >
               Handcrafted with organic ingredients specially formulated for textured,
               African, and curly hair. Your natural hair journey starts here.
@@ -155,13 +156,13 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
             >
-              <Link to="/shop" className="btn-primary text-base px-8 py-4">
+              <Link to="/shop" className="btn-primary text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 text-center">
                 Shop Now
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link to="/about" className="btn-secondary text-base px-8 py-4">
+              <Link to="/about" className="btn-secondary text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 text-center">
                 Our Story
               </Link>
             </motion.div>
@@ -238,7 +239,7 @@ export default function HomePage() {
       {/* ── Brand Story Teaser ── */}
       <section className="section bg-sage/10">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -248,17 +249,17 @@ export default function HomePage() {
               <p className="text-terracotta font-body font-medium text-xs uppercase tracking-widest mb-3">
                 Our Story
               </p>
-              <h2 className="font-heading text-3xl md:text-4xl text-brown leading-snug mb-6">
+              <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl text-brown leading-snug mb-6">
                 Born from a personal{' '}
                 <em className="text-terracotta not-italic">hair journey</em>
               </h2>
-              <p className="font-body text-brown/70 leading-relaxed mb-6">
+              <p className="font-body text-brown/70 leading-relaxed text-sm sm:text-base mb-6">
                 Blossom Natural was born out of frustration and love. Our founder spent years
                 struggling to find products that truly worked for her 4C hair — so she made
                 her own. Today, those same handcrafted formulas are helping thousands of
                 women across Africa embrace their natural texture.
               </p>
-              <Link to="/about" className="btn-primary">
+              <Link to="/about" className="btn-primary text-sm sm:text-base">
                 Read Our Full Story <ArrowRight className="h-4 w-4" />
               </Link>
             </motion.div>
@@ -277,12 +278,12 @@ export default function HomePage() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-lg p-4 flex items-center gap-3">
-                <div className="bg-sage/20 rounded-xl p-2.5">
-                  <Leaf className="h-5 w-5 text-sage-dark" />
+              <div className="absolute bottom-3 sm:bottom-4 md:-bottom-6 left-3 sm:left-4 md:-left-6 bg-white rounded-2xl shadow-lg p-3 sm:p-4 flex items-center gap-3">
+                <div className="bg-sage/20 rounded-xl p-2 sm:p-2.5">
+                  <Leaf className="h-4 sm:h-5 w-4 sm:w-5 text-sage-dark" />
                 </div>
                 <div>
-                  <p className="font-heading text-brown text-sm font-semibold">100% Organic</p>
+                  <p className="font-heading text-brown text-xs sm:text-sm font-semibold">100% Organic</p>
                   <p className="text-xs text-brown/50">No harmful chemicals</p>
                 </div>
               </div>
@@ -336,16 +337,16 @@ export default function HomePage() {
       </section>
 
       {/* ── Newsletter Banner ── */}
-      <section className="bg-terracotta py-16">
+      <section className="bg-terracotta py-12 md:py-16">
         <div className="container-custom text-center">
-          <h2 className="font-heading text-3xl md:text-4xl text-white mb-3">
+          <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl text-white mb-3">
             Join the Blossom Family
           </h2>
-          <p className="font-body text-white/80 mb-8 max-w-md mx-auto">
+          <p className="font-body text-white/80 text-sm sm:text-base mb-6 md:mb-8 max-w-md mx-auto">
             Get exclusive hair care tips, new product launches, and special offers straight
             to your inbox.
           </p>
-          <form className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+          <form className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center max-w-md mx-auto">
             <input
               type="email"
               placeholder="your@email.com"
