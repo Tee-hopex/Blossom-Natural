@@ -76,7 +76,7 @@ export default function AboutPage() {
           <p className="text-terracotta text-xs font-medium uppercase tracking-widest mb-3">Meet the Founder</p>
           <h2 className="font-heading text-3xl md:text-4xl text-brown mb-6">
             {/* Placeholder — you will replace this with the real founder name */}
-            [Founder Name]
+            Ogene Confidence, The Natural Hair Alchemist
           </h2>
           <div className="prose prose-brown max-w-none font-body text-brown/70 leading-loose text-base space-y-4">
             <p>
