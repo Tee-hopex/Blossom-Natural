@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import Layout from '@/components/layout/Layout';
 import AdminLayout from '@/components/admin/AdminLayout';
@@ -25,9 +25,11 @@ const ReviewsPage     = lazy(() => import('@/pages/admin/ReviewsPage'));
 const SettingsPage    = lazy(() => import('@/pages/admin/SettingsPage'));
 
 export default function App() {
+  const location = useLocation();
+
   return (
     <Suspense fallback={<LoadingSpinner fullScreen />}>
-      <Routes>
+      <Routes location={location} key={location.pathname}>
         {/* ── Public storefront ─────────────────────────────────────────── */}
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
