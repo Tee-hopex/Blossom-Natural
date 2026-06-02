@@ -11,7 +11,7 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 const heroSlides = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1920&q=85",
+    image: "https://images.unsplash.com/photo-1632765854612-9b02b6ec2b15?auto=format&fit=crop&w=900&q=90",
     tag: "Premium Natural Hair Care",
     headline: "Nourish. Grow.",
     highlight: "Blossom.",
@@ -19,7 +19,7 @@ const heroSlides = [
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1920&q=85",
+    image: "https://images.unsplash.com/photo-1632765866070-3fadf25d3d5b?auto=format&fit=crop&w=900&q=90",
     tag: "100% Organic Ingredients",
     headline: "From Nature to",
     highlight: "Your Crown.",
@@ -27,7 +27,7 @@ const heroSlides = [
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1531123897727-8f129e1bfa82?auto=format&fit=crop&w=1920&q=85",
+    image: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=900&q=90",
     tag: "Clinically Tested",
     headline: "Real Results,",
     highlight: "Real Confidence.",
@@ -163,95 +163,139 @@ export default function HomePage() {
       </Helmet>
 
       {/* ── Hero Carousel ── */}
-      <section className="relative overflow-hidden min-h-[88vh] flex items-center bg-brown group">
-        {/* Carousel Backgrounds */}
-        {heroSlides.map((slide, idx) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              idx === currentSlide ? "opacity-100 z-0" : "opacity-0 z-[-1]"
-            }`}
-            aria-hidden={idx !== currentSlide}
-          >
-            <img
-              src={slide.image}
-              alt="Natural Hair"
-              className="w-full h-full object-cover"
-              style={{
-                transform: idx === currentSlide ? "scale(1)" : "scale(1.05)",
-                transition: "transform 8s ease-out",
-              }}
-            />
-            {/* Soft cream overlay so the dark text remains readable */}
-            <div className="absolute inset-0 bg-cream/85 sm:bg-cream/75 md:bg-gradient-to-r md:from-cream/95 md:via-cream/80 md:to-transparent" />
-          </div>
-        ))}
+      <section className="bg-cream overflow-hidden group">
 
-        <div className="container-custom relative z-10 py-12 md:py-20 w-full">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl"
-          >
-            <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage/20 text-terracotta font-body font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-4 sm:mb-6">
-              <Leaf className="h-3 w-3" />
-              {heroSlides[currentSlide].tag}
-            </p>
-            
-            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-brown leading-[1.1] mb-4 md:mb-6">
-              {heroSlides[currentSlide].headline}
-              <br />
-              <em className="text-terracotta not-italic">{heroSlides[currentSlide].highlight}</em>
-            </h1>
-            
-            <p className="font-body text-brown/80 text-base sm:text-lg leading-relaxed mb-8 md:mb-10 max-w-xl">
-              {heroSlides[currentSlide].sub}
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <Link to="/shop" className="btn-primary text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 text-center shadow-lg shadow-terracotta/20">
-                Shop Collection
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link to="/about" className="btn-secondary text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 text-center bg-cream/40 backdrop-blur-sm border-terracotta/50">
-                Our Story
-              </Link>
+        {/* Mobile: image strip */}
+        <div className="md:hidden relative h-72 sm:h-80 overflow-hidden">
+          {heroSlides.map((slide, idx) => (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                idx === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <img
+                src={slide.image}
+                alt="Natural hair"
+                className="w-full h-full object-cover object-[50%_15%]"
+                loading={idx === 0 ? 'eager' : 'lazy'}
+              />
             </div>
-          </motion.div>
+          ))}
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-cream to-transparent pointer-events-none" />
         </div>
 
-        {/* Carousel Controls */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 rounded-full bg-cream/60 backdrop-blur text-brown hover:bg-cream transition-all opacity-0 group-hover:opacity-100 disabled:opacity-0 focus:opacity-100"
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 rounded-full bg-cream/60 backdrop-blur text-brown hover:bg-cream transition-all opacity-0 group-hover:opacity-100 disabled:opacity-0 focus:opacity-100"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
+        {/* Split layout: text left + image right */}
+        <div className="flex md:min-h-[88vh]">
 
-        {/* Indicators */}
-        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-          {heroSlides.map((_, idx) => (
+          {/* Text panel */}
+          <div className="w-full md:w-[54%] flex items-center bg-cream py-10 md:py-20 relative z-10">
+            <div className="w-full px-6 sm:px-10 md:pl-[7%] md:pr-8 lg:pl-[9%]">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="max-w-xl"
+              >
+                <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage/20 text-terracotta font-body font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-5 sm:mb-6">
+                  <Leaf className="h-3 w-3" />
+                  {heroSlides[currentSlide].tag}
+                </p>
+
+                <h1 className="font-heading text-4xl sm:text-5xl md:text-5xl lg:text-6xl text-brown leading-[1.1] mb-4 md:mb-6">
+                  {heroSlides[currentSlide].headline}
+                  <br />
+                  <em className="text-terracotta not-italic">{heroSlides[currentSlide].highlight}</em>
+                </h1>
+
+                <p className="font-body text-brown/70 text-base sm:text-lg leading-relaxed mb-8 md:mb-10 max-w-md">
+                  {heroSlides[currentSlide].sub}
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <Link to="/shop" className="btn-primary text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 text-center shadow-lg shadow-terracotta/20">
+                    Shop Collection
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link to="/about" className="btn-secondary text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 text-center">
+                    Our Story
+                  </Link>
+                </div>
+              </motion.div>
+
+              {/* Slide indicators + mobile arrows */}
+              <div className="flex items-center gap-3 mt-10">
+                {heroSlides.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentSlide(idx)}
+                    aria-label={`Go to slide ${idx + 1}`}
+                    className={`transition-all duration-300 rounded-full ${
+                      idx === currentSlide
+                        ? 'w-8 h-2 bg-terracotta'
+                        : 'w-2 h-2 bg-brown/25 hover:bg-brown/40'
+                    }`}
+                  />
+                ))}
+                <div className="flex items-center gap-2 ml-4 md:hidden">
+                  <button
+                    onClick={prevSlide}
+                    className="p-1.5 rounded-full bg-brown/10 text-brown hover:bg-brown/20 transition-colors"
+                    aria-label="Previous slide"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="p-1.5 rounded-full bg-brown/10 text-brown hover:bg-brown/20 transition-colors"
+                    aria-label="Next slide"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Image panel — desktop only */}
+          <div className="hidden md:block w-[46%] relative overflow-hidden">
+            {heroSlides.map((slide, idx) => (
+              <div
+                key={slide.id}
+                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                  idx === currentSlide ? 'opacity-100' : 'opacity-0'
+                }`}
+                aria-hidden={idx !== currentSlide}
+              >
+                <img
+                  src={slide.image}
+                  alt="Natural Hair"
+                  className="w-full h-full object-cover object-[50%_15%]"
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                />
+              </div>
+            ))}
+            {/* Left-edge blend into cream */}
+            <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-cream to-transparent pointer-events-none z-10" />
+
+            {/* Desktop nav arrows */}
             <button
-              key={idx}
-              onClick={() => setCurrentSlide(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-              className={`transition-all duration-300 rounded-full ${
-                idx === currentSlide
-                  ? "w-8 h-2 bg-terracotta"
-                  : "w-2 h-2 bg-brown/30 hover:bg-brown/50"
-              }`}
-            />
-          ))}
+              onClick={prevSlide}
+              className="absolute left-8 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-white/70 backdrop-blur-sm text-brown hover:bg-white transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-5 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-white/70 backdrop-blur-sm text-brown hover:bg-white transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+
         </div>
       </section>
 
