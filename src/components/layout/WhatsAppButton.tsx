@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-const WHATSAPP_NUMBER = '2348000000000'; // update with real number
+const WHATSAPP_NUMBER = '2348140728945'; // update with real number
 const MESSAGE = encodeURIComponent(
   "Hi! I'm interested in Blossom Natural products. Can you help me?"
 );

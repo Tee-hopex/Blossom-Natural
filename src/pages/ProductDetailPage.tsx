@@ -7,7 +7,7 @@ import { useProduct } from '@/hooks/useProducts';
 import { useCartStore } from '@/store/cartStore';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
-const WHATSAPP_NUMBER = '2348000000000';
+const WHATSAPP_NUMBER = '2348140728945';
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();

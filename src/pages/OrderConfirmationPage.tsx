@@ -5,7 +5,7 @@ import { CheckCircle2, Copy, MessageCircle, ShoppingBag } from 'lucide-react';
 import { OrderConfirmation } from '@/types';
 import toast from 'react-hot-toast';
 
-const WHATSAPP_NUMBER = '2348000000000';
+const WHATSAPP_NUMBER = '2348140728945';
 
 export default function OrderConfirmationPage() {
   const location = useLocation();
