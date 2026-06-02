@@ -35,6 +35,10 @@ export interface Product {
   description: string;
   benefits: string[];
   ingredients: string[];
+  suitableFor?: string[];
+  freeFrom?: string[];
+  warning?: string;
+  faqs?: { question: string; answer: string }[];
   usage?: string;
   images: string[];
   stock: number;

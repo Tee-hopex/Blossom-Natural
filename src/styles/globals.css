@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    --color-sage: #A8CABA;
-    --color-cream: #F8F1E9;
-    --color-terracotta: #C47C5D;
-    --color-gold: #E8C39E;
-    --color-brown: #3F2A1E;
+    --color-sage: #6B7D2B;
+    --color-cream: #F5EDE0;
+    --color-terracotta: #1B4332;
+    --color-gold: #C4913C;
+    --color-brown: #2C1810;
   }
 
   html {
@@ -31,7 +31,7 @@
   }
 
   .btn-primary {
-    @apply btn bg-terracotta text-white hover:bg-terracotta-dark focus:ring-terracotta;
+    @apply btn bg-terracotta text-white hover:bg-terracotta-light focus:ring-terracotta;
   }
 
   .btn-secondary {
@@ -39,7 +39,7 @@
   }
 
   .btn-sage {
-    @apply btn bg-sage text-brown hover:bg-sage-dark focus:ring-sage;
+    @apply btn bg-sage text-white hover:bg-sage-dark focus:ring-sage;
   }
 
   /* Card base */

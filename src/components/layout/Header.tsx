@@ -35,7 +35,7 @@ export default function Header() {
       <div className="container-custom flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
-          <Leaf className="h-6 w-6 text-sage group-hover:text-terracotta transition-colors" />
+          <Leaf className="h-6 w-6 text-terracotta group-hover:text-sage transition-colors" />
           <span className="font-heading text-xl md:text-2xl text-brown font-semibold tracking-wide">
             Blossom Natural
           </span>
@@ -110,7 +110,7 @@ export default function Header() {
                   className={({ isActive }) =>
                     `px-4 py-3 rounded-xl font-body font-medium text-sm transition-colors ${
                       isActive
-                        ? 'bg-sage/20 text-terracotta'
+                        ? 'bg-terracotta/10 text-terracotta'
                         : 'text-brown/70 hover:bg-sage/10 hover:text-brown'
                     }`
                   }

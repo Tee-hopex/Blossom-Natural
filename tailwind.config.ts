@@ -6,26 +6,26 @@ const config: Config = {
     extend: {
       colors: {
         sage: {
-          DEFAULT: '#A8CABA',
-          light: '#C5DDD1',
-          dark: '#7BA898',
+          DEFAULT: '#6B7D2B',
+          light: '#8A9D4A',
+          dark: '#556420',
         },
         cream: {
-          DEFAULT: '#F8F1E9',
-          dark: '#EDE3D6',
+          DEFAULT: '#F5EDE0',
+          dark: '#E8DDD0',
         },
         terracotta: {
-          DEFAULT: '#C47C5D',
-          light: '#D4967A',
-          dark: '#A86040',
+          DEFAULT: '#1B4332',
+          light: '#2D6A4F',
+          dark: '#143528',
         },
         gold: {
-          DEFAULT: '#E8C39E',
-          dark: '#D4A878',
+          DEFAULT: '#C4913C',
+          dark: '#A67A30',
         },
         brown: {
-          DEFAULT: '#3F2A1E',
-          light: '#5C3E2E',
+          DEFAULT: '#2C1810',
+          light: '#4A3228',
         },
       },
       fontFamily: {
@@ -34,7 +34,7 @@ const config: Config = {
       },
       backgroundImage: {
         'hero-gradient':
-          'linear-gradient(135deg, rgba(168,202,186,0.9) 0%, rgba(248,241,233,0.8) 50%, rgba(196,124,93,0.15) 100%)',
+          'linear-gradient(135deg, rgba(27,67,50,0.06) 0%, rgba(245,237,224,0.95) 35%, rgba(107,125,43,0.08) 100%)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

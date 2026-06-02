@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Star, ShoppingBag, Zap, ChevronLeft, Minus, Plus, CheckCircle2, MessageCircle } from 'lucide-react';
+import { Star, ShoppingBag, Zap, ChevronLeft, Minus, Plus, CheckCircle2, MessageCircle, AlertTriangle } from 'lucide-react';
 import { useProduct } from '@/hooks/useProducts';
 import { useCartStore } from '@/store/cartStore';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
@@ -224,7 +224,7 @@ export default function ProductDetailPage() {
 
               {/* Benefits preview */}
               {product.benefits.length > 0 && (
-                <div className="bg-sage/10 rounded-2xl p-5">
+                <div className="bg-sage/10 rounded-2xl p-5 mb-6">
                   <p className="font-heading text-sm text-brown font-semibold mb-3">Key Benefits</p>
                   <ul className="space-y-2">
                     {product.benefits.map((b) => (
@@ -234,6 +234,20 @@ export default function ProductDetailPage() {
                       </li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {/* Suitable For */}
+              {product.suitableFor && product.suitableFor.length > 0 && (
+                <div>
+                  <p className="font-heading text-sm text-brown font-semibold mb-3">Suitable For / Best For</p>
+                  <div className="flex flex-wrap gap-2">
+                    {product.suitableFor.map((item) => (
+                      <span key={item} className="bg-white text-brown text-xs px-3 py-1.5 rounded-full border border-cream-dark">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -261,12 +275,27 @@ export default function ProductDetailPage() {
             <div className="max-w-2xl text-brown/70 leading-relaxed">
               {activeTab === 'description' && <p>{product.description}</p>}
               {activeTab === 'ingredients' && (
-                <div className="flex flex-wrap gap-2">
-                  {product.ingredients.map((ing) => (
-                    <span key={ing} className="bg-cream-dark text-brown text-sm px-3 py-1.5 rounded-full">
-                      {ing}
-                    </span>
-                  ))}
+                <div>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {product.ingredients.map((ing) => (
+                      <span key={ing} className="bg-cream-dark text-brown text-sm px-3 py-1.5 rounded-full">
+                        {ing}
+                      </span>
+                    ))}
+                  </div>
+                  {product.freeFrom && product.freeFrom.length > 0 && (
+                    <div className="mt-6 pt-6 border-t border-cream-dark">
+                      <p className="font-heading text-sm text-brown font-semibold mb-3">Free From</p>
+                      <ul className="grid grid-cols-2 gap-2">
+                        {product.freeFrom.map((item) => (
+                          <li key={item} className="flex items-center gap-2 text-sm text-brown/70">
+                            <span className="w-1.5 h-1.5 rounded-full bg-terracotta"></span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               )}
               {activeTab === 'usage' && (
@@ -275,6 +304,35 @@ export default function ProductDetailPage() {
                   : <p className="text-brown/40 italic">Usage instructions coming soon.</p>
               )}
             </div>
+
+            {/* Warning Alert */}
+            {product.warning && (
+              <div className="max-w-2xl bg-[#FFF9ED] border border-[#F4D9B0] rounded-xl p-4 mt-8 flex gap-3">
+                <AlertTriangle className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                <p className="text-sm text-brown/80 leading-relaxed">{product.warning}</p>
+              </div>
+            )}
+
+            {/* FAQs Accordion */}
+            {product.faqs && product.faqs.length > 0 && (
+              <div className="max-w-2xl mt-16">
+                <h3 className="font-heading text-2xl text-brown mb-6">Frequently Asked Questions</h3>
+                <div className="space-y-3">
+                  {product.faqs.map((faq, i) => (
+                    <details key={i} className="group bg-white rounded-xl border border-cream-dark overflow-hidden">
+                      <summary className="flex items-center justify-between p-5 font-semibold text-brown cursor-pointer select-none">
+                        {faq.question}
+                        <Plus className="h-4 w-4 text-brown/50 group-open:hidden shrink-0 ml-4" />
+                        <Minus className="h-4 w-4 text-brown/50 hidden group-open:block shrink-0 ml-4" />
+                      </summary>
+                      <div className="px-5 pb-5 text-sm text-brown/70 leading-relaxed border-t border-cream-dark/50 pt-4">
+                        {faq.answer}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>

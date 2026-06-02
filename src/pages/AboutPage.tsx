@@ -73,20 +73,41 @@ export default function AboutPage() {
       {/* Founder Bio */}
       <section className="section bg-cream">
         <div className="container-custom max-w-3xl">
-          <p className="text-terracotta text-xs font-medium uppercase tracking-widest mb-3">Meet the Founder</p>
+          <p className="text-terracotta text-xs font-medium uppercase tracking-widest mb-3">Meet Our Founder</p>
           <h2 className="font-heading text-3xl md:text-4xl text-brown mb-6">
-            {/* Placeholder — you will replace this with the real founder name */}
-            Ogene Confidence, The Natural Hair Alchemist
+            Ogene Confidence E.
           </h2>
           <div className="prose prose-brown max-w-none font-body text-brown/70 leading-loose text-base space-y-4">
             <p>
-              {/* You will provide the full founder biography — paste it here */}
-              [Founder biography coming soon. Please provide the full text and we will add it here.]
+              Growing up in a Deeper Life Bible Church household, where my parents were pastors, caring for my natural hair wasn't a choice—it was simply a way of life. Chemical treatments and artificial enhancements were never an option, and while I admired long, healthy hair, achieving it often felt frustratingly out of reach.
             </p>
             <p>
-              Her mission is simple: every woman with textured, African, or curly hair deserves products that
-              celebrate — not fight — their natural texture. Blossom Natural was built on that belief, and it
-              remains the foundation of everything we create.
+              Like many young girls, I spent years dealing with dryness, breakage, and hair that seemed determined not to grow past a certain point. I tried different products, followed countless recommendations, and invested time and effort into my hair, yet the results rarely matched the promises on the labels. What should have felt like self-care often felt like a struggle.
+            </p>
+            <p>
+              As I grew older, I realized that many of the products available to us were not created with our hair, our climate, or our unique needs in mind. The more I searched for solutions, the more I discovered a world filled with conflicting advice, misleading claims, and products that focused on quick results rather than long-term hair health.
+            </p>
+            <p>
+              Instead of continuing the cycle of trial and error, I decided to understand the science behind healthy hair for myself.
+            </p>
+            <p>
+              What began as a personal quest soon became a passion. I immersed myself in research, studied cosmetology, explored ingredients, and dedicated myself to learning how to create products that were not only effective but also safe, stable, and genuinely beneficial for natural hair.
+            </p>
+            <p>
+              The transformation in my own hair was remarkable. It became healthier, stronger, softer, and easier to manage. More importantly, it gave me confidence. Friends and family began asking what I was using, and before long, I found myself helping other women who were facing the same frustrations I once experienced.
+            </p>
+            <p>
+              That journey became Blossom Natural.
+            </p>
+            <p>
+              Today, Blossom Natural is more than a haircare brand. It is a commitment to helping women care for their hair with confidence through thoughtfully formulated products, practical education, and routines designed for real, lasting results.
+            </p>
+            <p>
+              Because healthy hair shouldn't feel like a burden. It should feel achievable, enjoyable, and natural.
+            </p>
+            <p className="font-heading italic text-brown font-semibold mt-6">
+              — Ogene Confidence E.<br />
+              <span className="text-sm font-body font-normal text-brown/60">Founder, Blossom Natural</span>
             </p>
           </div>
         </div>

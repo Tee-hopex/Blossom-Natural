@@ -1,11 +1,39 @@
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Star, Leaf, Droplets, Heart } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Star, Leaf, Droplets, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { useFeaturedProducts } from '@/hooks/useProducts';
 import { useCartStore } from '@/store/cartStore';
 import { Product } from '@/types';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
+
+const heroSlides = [
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1920&q=85",
+    tag: "Premium Natural Hair Care",
+    headline: "Nourish. Grow.",
+    highlight: "Blossom.",
+    sub: "Handcrafted with organic ingredients specially formulated for textured, African, and curly hair. Your natural hair journey starts here.",
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1920&q=85",
+    tag: "100% Organic Ingredients",
+    headline: "From Nature to",
+    highlight: "Your Crown.",
+    sub: "We source the finest African botanicals to create formulas that truly penetrate, hydrate, and heal your hair from the roots.",
+  },
+  {
+    id: 3,
+    image: "https://images.unsplash.com/photo-1531123897727-8f129e1bfa82?auto=format&fit=crop&w=1920&q=85",
+    tag: "Clinically Tested",
+    headline: "Real Results,",
+    highlight: "Real Confidence.",
+    sub: "Join thousands of women who have transformed their edges, length, and scalp health with our proven regimens.",
+  }
+];
 
 // ── Product Card ──────────────────────────────────────────────────────────
 function ProductCard({ product }: { product: Product }) {
@@ -109,6 +137,21 @@ const features = [
 export default function HomePage() {
   const { data, isLoading } = useFeaturedProducts();
 
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  }, []);
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 6000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
   return (
     <>
       <Helmet>
@@ -119,59 +162,97 @@ export default function HomePage() {
         />
       </Helmet>
 
-      {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-hero-gradient min-h-[88vh] flex items-center">
-        <div className="container-custom py-12 md:py-20">
-          <div className="max-w-2xl">
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-terracotta font-body font-medium text-xs sm:text-sm uppercase tracking-widest mb-3 md:mb-4"
-            >
-              Premium Natural Hair Care
-            </motion.p>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brown leading-tight mb-4 md:mb-6"
-            >
-              Nourish.
+      {/* ── Hero Carousel ── */}
+      <section className="relative overflow-hidden min-h-[88vh] flex items-center bg-brown group">
+        {/* Carousel Backgrounds */}
+        {heroSlides.map((slide, idx) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              idx === currentSlide ? "opacity-100 z-0" : "opacity-0 z-[-1]"
+            }`}
+            aria-hidden={idx !== currentSlide}
+          >
+            <img
+              src={slide.image}
+              alt="Natural Hair"
+              className="w-full h-full object-cover"
+              style={{
+                transform: idx === currentSlide ? "scale(1)" : "scale(1.05)",
+                transition: "transform 8s ease-out",
+              }}
+            />
+            {/* Soft cream overlay so the dark text remains readable */}
+            <div className="absolute inset-0 bg-cream/85 sm:bg-cream/75 md:bg-gradient-to-r md:from-cream/95 md:via-cream/80 md:to-transparent" />
+          </div>
+        ))}
+
+        <div className="container-custom relative z-10 py-12 md:py-20 w-full">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl"
+          >
+            <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage/20 text-terracotta font-body font-semibold text-[10px] sm:text-xs uppercase tracking-widest mb-4 sm:mb-6">
+              <Leaf className="h-3 w-3" />
+              {heroSlides[currentSlide].tag}
+            </p>
+            
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-brown leading-[1.1] mb-4 md:mb-6">
+              {heroSlides[currentSlide].headline}
               <br />
-              <em className="text-terracotta not-italic">Grow.</em>
-              <br />
-              Blossom.
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-body text-brown/70 text-base sm:text-lg leading-relaxed mb-6 md:mb-10 max-w-xl"
-            >
-              Handcrafted with organic ingredients specially formulated for textured,
-              African, and curly hair. Your natural hair journey starts here.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
-            >
-              <Link to="/shop" className="btn-primary text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 text-center">
-                Shop Now
+              <em className="text-terracotta not-italic">{heroSlides[currentSlide].highlight}</em>
+            </h1>
+            
+            <p className="font-body text-brown/80 text-base sm:text-lg leading-relaxed mb-8 md:mb-10 max-w-xl">
+              {heroSlides[currentSlide].sub}
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <Link to="/shop" className="btn-primary text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 text-center shadow-lg shadow-terracotta/20">
+                Shop Collection
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link to="/about" className="btn-secondary text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 text-center">
+              <Link to="/about" className="btn-secondary text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 text-center bg-cream/40 backdrop-blur-sm border-terracotta/50">
                 Our Story
               </Link>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Decorative blobs */}
-        <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-sage/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-10 right-10 w-40 h-40 bg-terracotta/10 rounded-full blur-2xl pointer-events-none" />
+        {/* Carousel Controls */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 rounded-full bg-cream/60 backdrop-blur text-brown hover:bg-cream transition-all opacity-0 group-hover:opacity-100 disabled:opacity-0 focus:opacity-100"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 p-2 sm:p-3 rounded-full bg-cream/60 backdrop-blur text-brown hover:bg-cream transition-all opacity-0 group-hover:opacity-100 disabled:opacity-0 focus:opacity-100"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+        </button>
+
+        {/* Indicators */}
+        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+          {heroSlides.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentSlide(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              className={`transition-all duration-300 rounded-full ${
+                idx === currentSlide
+                  ? "w-8 h-2 bg-terracotta"
+                  : "w-2 h-2 bg-brown/30 hover:bg-brown/50"
+              }`}
+            />
+          ))}
+        </div>
       </section>
 
       {/* ── Features strip ── */}
