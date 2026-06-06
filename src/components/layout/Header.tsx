@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ShoppingBag, Menu, X, Leaf } from 'lucide-react';
+import { ShoppingBag, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/store/cartStore';
+import logo from '@/assets/logo.png';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -34,11 +35,12 @@ export default function Header() {
     >
       <div className="container-custom flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <Leaf className="h-6 w-6 text-terracotta group-hover:text-sage transition-colors" />
-          <span className="font-heading text-xl md:text-2xl text-brown font-semibold tracking-wide">
-            Blossom Natural
-          </span>
+        <Link to="/" className="flex items-center group">
+          <img
+            src={logo}
+            alt="Blossom Natural"
+            className="h-10 md:h-14 w-auto object-contain transition-opacity group-hover:opacity-80"
+          />
         </Link>
 
         {/* Desktop Nav */}

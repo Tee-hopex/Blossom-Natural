@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Leaf, Instagram, Youtube, Mail, Phone } from 'lucide-react';
+import { Instagram, Youtube, Mail, Phone } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import logo from '@/assets/logo.png';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -24,11 +25,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <Leaf className="h-5 w-5 text-sage" />
-              <span className="font-heading text-xl text-cream font-semibold">
-                Blossom Natural
-              </span>
+            <Link to="/" className="inline-block mb-4">
+              <img
+                src={logo}
+                alt="Blossom Natural"
+                className="h-16 w-auto object-contain brightness-0 invert opacity-90"
+              />
             </Link>
             <p className="font-body text-sm leading-relaxed text-cream/60 mb-6">
               Handcrafted with love for your natural hair journey. Premium organic

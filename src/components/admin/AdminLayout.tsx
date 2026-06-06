@@ -2,9 +2,10 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {
   LayoutDashboard, Package, ShoppingBag, Tag, Star,
-  Settings, LogOut, Menu, Leaf, ChevronRight,
+  Settings, LogOut, Menu, ChevronRight,
 } from 'lucide-react';
 import { useAdminStore } from '@/store/adminStore';
+import icon from '@/assets/icon.png';
 import toast from 'react-hot-toast';
 
 const navItems = [
@@ -30,8 +31,8 @@ export default function AdminLayout() {
   const Sidebar = () => (
     <aside className="flex flex-col h-full bg-brown text-cream">
       {/* Logo */}
-      <div className="flex items-center gap-2.5 px-6 py-5 border-b border-cream/10">
-        <Leaf className="h-5 w-5 text-sage shrink-0" />
+      <div className="flex items-center gap-3 px-6 py-5 border-b border-cream/10">
+        <img src={icon} alt="BN" className="h-8 w-8 object-contain brightness-0 invert opacity-90 shrink-0" />
         <div>
           <p className="font-heading text-cream text-base font-semibold leading-tight">Blossom Natural</p>
           <p className="text-[10px] text-cream/40 uppercase tracking-widest">Admin Panel</p>

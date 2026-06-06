@@ -11,10 +11,6 @@
     --color-brown: #2C1810;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
     @apply bg-cream text-brown;
   }
