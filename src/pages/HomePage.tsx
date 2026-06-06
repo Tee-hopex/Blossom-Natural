@@ -121,7 +121,7 @@ const testimonials = [
   {
     name: 'Fatima B.',
     location: 'Kano',
-    text: 'Fast delivery, beautifully packaged, and the products smell heavenly. My scalp itching is completely gone after 2 weeks of the scalp oil.',
+    text: 'Fast delivery, beautifully packaged, and the products smell heavenly. My scalp itching is completely gone after 2 weeks of Ayurvedic mist.',
     rating: 5,
   },
 ];
