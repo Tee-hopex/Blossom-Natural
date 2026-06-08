@@ -3,16 +3,36 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { ShoppingBag, Landmark, MessageSquare, ChevronRight } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
 import { useCartStore } from '@/store/cartStore';
 import { usePlaceOrder, buildOrderPayload } from '@/hooks/useOrder';
-import { CheckoutFormData } from '@/types';
+import { CheckoutFormData, ApiResponse } from '@/types';
+import api from '@/lib/axios';
 import toast from 'react-hot-toast';
+
+interface SiteSettings {
+  bankName: string;
+  bankAccountName: string;
+  bankAccountNumber: string;
+}
+
+function usePublicSettings() {
+  return useQuery({
+    queryKey: ['settings'],
+    queryFn: async () => {
+      const { data } = await api.get<ApiResponse<SiteSettings>>('/settings');
+      return data.data!;
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+}
 
 // Simple inline useForm without react-hook-form dependency — plain state
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCartStore();
   const navigate = useNavigate();
   const { mutateAsync: placeOrder, isPending } = usePlaceOrder();
+  const { data: settings } = usePublicSettings();
 
   const [form, setForm] = useState<CheckoutFormData>({
     customerName: '',
@@ -122,10 +142,11 @@ export default function CheckoutPage() {
                     <div className="sm:col-span-2">{field('address', 'Delivery Address', 'text', '12 Lekki Phase 1, Lagos Island')}</div>
                     {field('city', 'City', 'text', 'Lagos')}
                     <div>
-                      <label className="block text-sm font-medium text-brown mb-1.5">
+                      <label htmlFor="state" className="block text-sm font-medium text-brown mb-1.5">
                         State <span className="text-terracotta">*</span>
                       </label>
                       <select
+                        id="state"
                         value={form.state}
                         onChange={(e) => setForm((f) => ({ ...f, state: e.target.value }))}
                         className={`input ${errors.state ? 'ring-2 ring-terracotta' : ''}`}
@@ -184,9 +205,9 @@ export default function CheckoutPage() {
                       <p className="font-heading text-base text-brown font-semibold">Bank Transfer Details</p>
                     </div>
                     {[
-                      ['Bank', 'First Bank Nigeria'],
-                      ['Account Name', 'Blossom Natural Ltd'],
-                      ['Account Number', '0000000000'],
+                      ['Bank', settings?.bankName ?? '—'],
+                      ['Account Name', settings?.bankAccountName ?? '—'],
+                      ['Account Number', settings?.bankAccountNumber ?? '—'],
                     ].map(([label, value]) => (
                       <div key={label} className="flex justify-between text-sm">
                         <span className="text-brown/50">{label}</span>
